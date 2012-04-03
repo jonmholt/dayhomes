@@ -27,11 +27,13 @@ group :development, :test do
   gem 'awesome_print'
   gem 'capistrano-fanfare'
   gem 'rspec-rails', '~> 2.6'
-  gem 'webrat', '~> 0.7.3'
+#  gem 'webrat', '~> 0.7.3'
   gem 'factory_girl_rails', :require => false
   gem 'shoulda-matchers'
   gem 'spork', '~> 1.0rc'
   gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
 end
 
 group :production do
