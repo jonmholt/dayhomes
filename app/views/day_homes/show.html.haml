@@ -12,10 +12,13 @@
         showClose: true,         // Shows a (X) icon/link in the top-right corner
         modalClass: "modal",    // CSS class added to the element being displayed in the modal.
     };
-  });
 
-  $(function(){
-    $(".photo_preview").colorbox({rel:'photo_preview'});
+    $('#coin-slider').coinslider({  width: 500,
+                                    effect: 'straight',
+                                    height: 300,
+                                    navigation: true,
+                                    delay: 5000,
+                                    titleSpeed: 700 });
   });
 
 %h2
@@ -162,27 +165,13 @@
 
     %h3.singleViewH3
       Photos
-    - if @day_home.photos.blank?
-      %p
-        No photos available.
-    - else    
 
-      %ul#slideshow
-        - @day_home.photos.each do |photo|
-          %li
-            %h3
-              = photo.caption
-            %span= photo.photo_url
-            = image_tag(photo.photo_url)
-
-      #sliderWrapper
-        #fullsize
-          #imgprev.imgnav{:title => "Previous Image"}
-          #imglink
-          #imgnext.imgnav{:title => "Next Image"}
-          #image
-          #information
-            %h3
+      #coin-container
+        #coin-slider
+          #homes
+            - unless @day_home.photos.blank?
+              - @day_home.photos.each do |dh_photo|
+                %img{:src=>"#{dh_photo.photo_url(:reg)}"}
 
 .row
   .span12
@@ -207,20 +196,3 @@
           or 
           = link_to 'Sign Up', new_user_path
           to leave a review.
-
-= content_for :header_scripts do
-  = javascript_include_tag 'jquery.home_slider'
-
-:javascript
-  $('slideshow').style.display='none';
-  $('sliderWrapper').style.display='block';
-  var slideshow=new TINY.slideshow("slideshow");
-  window.onload=function(){
-    slideshow.auto=true;
-    slideshow.speed=5;
-    slideshow.info="information";
-    slideshow.scrollSpeed=4;
-    slideshow.spacing=5;
-    slideshow.active="#fff";
-    slideshow.init("slideshow","image","imgprev","imgnext","imglink");
-  }
