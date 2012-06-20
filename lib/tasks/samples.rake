@@ -65,7 +65,21 @@ namespace :db do
           {:postal_code => 'T6J5M5', :street1 => '2978 106 Street NW'},
           {:postal_code => 'T5S1S5', :street1 => '10070 178 Street NW'}
       ]
-
+      
+      # filler hashes
+      filler = [
+          "Perhaps a re-engineering of your current world view will re-energize your online nomenclature to enable a new holistic interactive enterprise internet communication solution.",
+          "Upscaling the resurgent networking exchange solutions, achieving a breakaway systemic electronic data interchange system synchronization, thereby exploiting technical environments for mission critical broad based capacity constrained systems. ",
+          "Fundamentally transforming well designed actionable information whose semantic content is virtually null.",
+          "To more fully clarify the current exchange, a few aggregate issues will require addressing to facilitate this distributed communication venue. ",
+          "In integrating non-aligned structures into existing legacy systems, a holistic gateway blueprint is a backward compatible packaging tangible of immeasurable strategic value in right-sizing conceptual frameworks when thinking outside the box. ",
+          "This being said, the ownership issues inherent in dominant thematic implementations cannot be understated vis-a vis document distribution on a real operating system consisting primarily of elements regarded as outdated and therefore impelling as a integrated out sourcing avenue to facilitate multi-level name value pairing in static components.",
+          "In order to properly merge and articulate these core assets, an acquisition statement outlining the information architecture, leading to a racheting up of convergence across the organic platform is an opportunity without precedent in current applicability transactional modeling.",
+          "Implementing these goals requires a careful examination to encompass an increasing complex out sourcing disbursement to ensure the extant parameters are not exceeded while focusing on infrastructure cohesion. ",
+          "Dynamic demand forecasting indicates that a mainstream approach may establish a basis for leading-edge information processing to insure the diversity of granularity in encompassing expansion of content provided within the multimedia framework under examination.",
+          "Empowerment in information design literacy demands the immediate and complete disregard of the entire contents of this cyberspace communication."
+      ]
+      
       def add_photos_to_dayhome(photos, day_home)
         puts "Adding photos to #{day_home.name}..."
         photos.map do |photo|
@@ -89,7 +103,8 @@ namespace :db do
                                                :postal_code => 'T6L5M6',
                                                :featured => true,
                                                :phone_number => '780-555-5555',
-                                               :blurb => 'Dayhome With Reviews is a terrific place for children to learn and have fun. With all sorts of activities in store, kids love it.'
+                                               :blurb => 'Dayhome With Reviews is a terrific place for children to learn and have fun. With all sorts of activities in store, kids love it.',
+                                               :highlight => filler[0] + filler[1] + filler [2]
                                               })
       day_home_with_reviews.availability_types << full_time_full_days
       photos = [
@@ -116,8 +131,15 @@ namespace :db do
           { :caption => "Activities for all ages.", :photo => "finger_painting.jpg"},
           { :caption => "Healthy food alternatives.", :photo => "fruit_salad.jpg" }
       ]
+      names = [
+          "Fanny fulltime",
+          "Two hears fulltime",
+          "Mayday fulltime",
+          "Alternatives fulltime"
+      ]
+      
       fulltime_addresses.each_with_index  do |street_and_postal, index|
-        d = DayHome.create!({:name => "DayHome #{index}",
+        d = DayHome.create!({:name => names[index],
                              :gmaps =>  true,
                              :city =>  'Edmonton',
                              :province =>  'AB',
@@ -126,8 +148,8 @@ namespace :db do
                              :email => "dh564f#{index}@dayhomeregistry.com",
                              :featured => true,
                              :phone_number => '780-555-5555',
-                             :blurb => "DayHome #{index} is a terrific place for children to learn and have fun. With all sorts of activities in store, kids love it."
-
+                             :blurb => "DayHome #{index} is a terrific place for children to learn and have fun. With all sorts of activities in store, kids love it.",
+                             :highlight => filler[1+Random.rand(10)] + filler[1+Random.rand(10)] + filler [1+Random.rand(10)]
                             }.merge(street_and_postal))
 
         d.availability_types << full_time_full_days
@@ -150,8 +172,14 @@ namespace :db do
           { :caption => "Homemade lunches", :photo => "mac_and_cheese.jpg" },
           { :caption => "Stimulating activities.", :photo => "lego.jpg" },
       ]
+      names = [
+          "Peggy part-time",
+          "Banana Chip part-time",
+          "Good Weather part-time",
+          "Blackburn part-time"
+      ]
       part_time_addresses.each_with_index  do |street_and_postal, index|
-        d = DayHome.create!({:name => "DayHome #{index}",
+        d = DayHome.create!({:name => names[index],
                              :gmaps =>  true,
                              :city =>  'Edmonton',
                              :province =>  'AB',
@@ -171,8 +199,12 @@ namespace :db do
       end
 
       # Create a couple of dayhomes with no availability
+      names = [
+          "NoTime no-time",
+          "Chocolate Mint no-time"
+      ]
       no_availability_addresses.each_with_index  do |street_and_postal, index|
-        d = DayHome.create!({:name => "DayHome #{index}",
+        d = DayHome.create!({:name => names[index],
                              :gmaps =>  true,
                              :city =>  'Edmonton',
                              :province =>  'AB',
